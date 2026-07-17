@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEXUS AI — The Future of Intelligent Robotics</title>
+    <meta name="description" content="Experience the next generation of AI robotics. NEXUS AI brings cutting-edge artificial intelligence to life through advanced humanoid robotics.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="preloader-inner">
+            <div class="preloader-ring"></div>
+            <div class="preloader-ring"></div>
+            <div class="preloader-ring"></div>
+            <div class="preloader-text">
+                <span data-text="NEXUS">NEXUS</span>
+                <div class="preloader-progress">
+                    <div class="preloader-progress-bar" id="preloadBar"></div>
+                </div>
+                <span class="preloader-percent" id="preloadPercent">0%</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Floating Particles Background -->
+    <canvas id="particleCanvas"></canvas>
+
+    <!-- Navigation -->
+    <nav id="mainNav">
+        <div class="nav-logo">
+            <div class="logo-icon">
+                <svg viewBox="0 0 40 40" fill="none">
+                    <circle cx="20" cy="20" r="18" stroke="url(#logoGrad)" stroke-width="2"/>
+                    <circle cx="20" cy="20" r="6" fill="url(#logoGrad)"/>
+                    <line x1="20" y1="2" x2="20" y2="14" stroke="url(#logoGrad)" stroke-width="1.5"/>
+                    <line x1="20" y1="26" x2="20" y2="38" stroke="url(#logoGrad)" stroke-width="1.5"/>
+                    <line x1="2" y1="20" x2="14" y2="20" stroke="url(#logoGrad)" stroke-width="1.5"/>
+                    <line x1="26" y1="20" x2="38" y2="20" stroke="url(#logoGrad)" stroke-width="1.5"/>
+                    <defs>
+                        <linearGradient id="logoGrad" x1="0" y1="0" x2="40" y2="40">
+                            <stop offset="0%" stop-color="#00d4ff"/>
+                            <stop offset="100%" stop-color="#7b2ff7"/>
+                        </linearGradient>
+                    </defs>
+                </svg>
+            </div>
+            <span class="logo-text">NEXUS<span class="logo-accent">.AI</span></span>
+        </div>
+        <div class="nav-links">
+            <a href="#hero" class="nav-link active" data-section="hero">Awakening</a>
+            <a href="#about" class="nav-link" data-section="about">About</a>
+            <a href="#capabilities" class="nav-link" data-section="capabilities">Capabilities</a>
+            <a href="#specs" class="nav-link" data-section="specs">Specifications</a>
+            <a href="#contact" class="nav-link" data-section="contact">Access</a>
+        </div>
+        <div class="nav-cta">
+            <button class="btn-glow" id="navCtaBtn">Get Early Access</button>
+        </div>
+        <div class="nav-hamburger" id="hamburger">
+            <span></span><span></span><span></span>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="#hero" class="mobile-link">Awakening</a>
+        <a href="#about" class="mobile-link">About</a>
+        <a href="#capabilities" class="mobile-link">Capabilities</a>
+        <a href="#specs" class="mobile-link">Specifications</a>
+        <a href="#contact" class="mobile-link">Access</a>
+    </div>
+
+    <!-- MAIN SCROLLABLE CONTAINER -->
+    <main>
+        <!-- PINNED ROBOT ANIMATION SECTION (Only this drives the animation) -->
+        <section id="hero" class="animation-scroll-section">
+            <div class="sticky-container">
+                <canvas id="robotCanvas"></canvas>
+                <div class="canvas-overlay"></div>
+                <div class="hud-overlay">
+                    <div class="hud-corner hud-tl"></div>
+                    <div class="hud-corner hud-tr"></div>
+                    <div class="hud-corner hud-bl"></div>
+                    <div class="hud-corner hud-br"></div>
+                    <div class="hud-grid"></div>
+                    <div class="hud-scanline"></div>
+                </div>
+                
+                <!-- Hero Content Overlay (fades out as you scroll down) -->
+                <div class="hero-text-overlay" id="heroOverlay">
+                    <div class="hero-badge">
+                        <span class="badge-dot"></span>
+                        <span>Next Generation AI Robotics</span>
+                    </div>
+                    <h1 class="hero-title">
+                        <span class="title-line">NEXUS AI</span>
+                        <span class="title-line gradient-text">The Awakening</span>
+                    </h1>
+                    <p class="hero-subtitle">Scroll down to initiate startup sequence. Watch the robot awaken and walk in full screen before accessing details.</p>
+                    <div class="scroll-indicator" id="scrollIndicator">
+                        <div class="scroll-mouse">
+                            <div class="scroll-dot"></div>
+                        </div>
+                        <span>Scroll to Awaken</span>
+                    </div>
+                </div>
+
+                <div class="system-status-hud">
+                    <div class="status-indicator">
+                        <span class="status-dot"></span>
+                        <span class="status-text">SYS_ONLINE // SEQUENCE_ACTIVE</span>
+                    </div>
+                    <div class="frame-counter" id="hudFrameCounter">FRAME // 000</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- DOWNSIDE MAIN CONTENT (Shows up after animation completes) -->
+        <div class="main-content-flow">
+            <!-- About Section -->
+            <section id="about" class="content-section">
+                <div class="section-container">
+                    <div class="section-header" data-animate="fade-up">
+                        <span class="section-tag">About NEXUS</span>
+                        <h2 class="section-title">Redefining The Boundary Between <span class="gradient-text">Human & Machine</span></h2>
+                        <p class="section-desc">NEXUS represents a quantum leap in humanoid robotics. Powered by a revolutionary neural architecture, it doesn't just process — it understands, adapts, and evolves.</p>
+                    </div>
+                    <div class="about-grid">
+                        <div class="about-card" data-animate="fade-up" data-delay="100">
+                            <div class="card-icon">
+                                <svg viewBox="0 0 48 48" fill="none">
+                                    <circle cx="24" cy="24" r="22" stroke="url(#grad1)" stroke-width="1.5" stroke-dasharray="4 4"/>
+                                    <path d="M24 8C24 8 32 16 32 24C32 32 24 40 24 40C24 40 16 32 16 24C16 16 24 8 24 8Z" fill="url(#grad1)" opacity="0.2"/>
+                                    <circle cx="24" cy="24" r="4" fill="url(#grad1)"/>
+                                    <defs><linearGradient id="grad1" x1="0" y1="0" x2="48" y2="48"><stop offset="0%" stop-color="#00d4ff"/><stop offset="100%" stop-color="#7b2ff7"/></linearGradient></defs>
+                                </svg>
+                            </div>
+                            <h3>Neural Cognition</h3>
+                            <p>Advanced neural networks process 50 trillion operations per second, enabling human-like reasoning and decision making in real-time.</p>
+                        </div>
+                        <div class="about-card" data-animate="fade-up" data-delay="200">
+                            <div class="card-icon">
+                                <svg viewBox="0 0 48 48" fill="none">
+                                    <rect x="4" y="4" width="40" height="40" rx="8" stroke="url(#grad2)" stroke-width="1.5"/>
+                                    <circle cx="16" cy="16" r="4" fill="url(#grad2)" opacity="0.5"/>
+                                    <circle cx="32" cy="16" r="4" fill="url(#grad2)" opacity="0.5"/>
+                                    <circle cx="24" cy="32" r="4" fill="url(#grad2)"/>
+                                    <line x1="16" y1="16" x2="24" y2="32" stroke="url(#grad2)" stroke-width="1"/>
+                                    <line x1="32" y1="16" x2="24" y2="32" stroke="url(#grad2)" stroke-width="1"/>
+                                    <defs><linearGradient id="grad2" x1="0" y1="0" x2="48" y2="48"><stop offset="0%" stop-color="#00d4ff"/><stop offset="100%" stop-color="#a855f7"/></linearGradient></defs>
+                                </svg>
+                            </div>
+                            <h3>Adaptive Learning</h3>
+                            <p>Self-evolving algorithms allow NEXUS to learn from every interaction, continuously improving its understanding and capabilities.</p>
+                        </div>
+                        <div class="about-card" data-animate="fade-up" data-delay="300">
+                            <div class="card-icon">
+                                <svg viewBox="0 0 48 48" fill="none">
+                                    <path d="M24 4L42 14V34L24 44L6 34V14L24 4Z" stroke="url(#grad3)" stroke-width="1.5"/>
+                                    <path d="M24 12L36 18V30L24 36L12 30V18L24 12Z" fill="url(#grad3)" opacity="0.15"/>
+                                    <circle cx="24" cy="24" r="5" fill="url(#grad3)"/>
+                                    <defs><linearGradient id="grad3" x1="0" y1="0" x2="48" y2="48"><stop offset="0%" stop-color="#00d4ff"/><stop offset="100%" stop-color="#ec4899"/></linearGradient></defs>
+                                </svg>
+                            </div>
+                            <h3>Quantum Processing</h3>
+                            <p>Hybrid quantum-classical computing core delivers unprecedented computational power for complex real-world problem solving.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Capabilities Section -->
+            <section id="capabilities" class="content-section">
+                <div class="section-container">
+                    <div class="section-header" data-animate="fade-up">
+                        <span class="section-tag">Capabilities</span>
+                        <h2 class="section-title">Beyond <span class="gradient-text">Imagination</span></h2>
+                    </div>
+                    <div class="capabilities-grid">
+                        <div class="capability-card glass-card" data-animate="fade-up" data-delay="100">
+                            <div class="cap-number">01</div>
+                            <h3>Computer Vision</h3>
+                            <p>360° environmental awareness with depth perception and object recognition at superhuman accuracy levels.</p>
+                            <div class="cap-bar"><div class="cap-fill" data-width="97"></div></div>
+                        </div>
+                        <div class="capability-card glass-card" data-animate="fade-up" data-delay="200">
+                            <div class="cap-number">02</div>
+                            <h3>Natural Language</h3>
+                            <p>Fluent in 127 languages with contextual understanding, emotional intelligence, and nuanced communication.</p>
+                            <div class="cap-bar"><div class="cap-fill" data-width="94"></div></div>
+                        </div>
+                        <div class="capability-card glass-card" data-animate="fade-up" data-delay="300">
+                            <div class="cap-number">03</div>
+                            <h3>Motion Planning</h3>
+                            <p>Biomimetic locomotion with 47 degrees of freedom enables fluid, human-like movement and dexterity.</p>
+                            <div class="cap-bar"><div class="cap-fill" data-width="91"></div></div>
+                        </div>
+                        <div class="capability-card glass-card" data-animate="fade-up" data-delay="400">
+                            <div class="cap-number">04</div>
+                            <h3>Predictive AI</h3>
+                            <p>Anticipates needs and outcomes using advanced probabilistic modeling and temporal pattern analysis.</p>
+                            <div class="cap-bar"><div class="cap-fill" data-width="89"></div></div>
+                        </div>
+                        <div class="capability-card glass-card" data-animate="fade-up" data-delay="500">
+                            <div class="cap-number">05</div>
+                            <h3>Emotional AI</h3>
+                            <p>Recognizes and responds to human emotions through facial analysis, voice tone, and behavioral cues.</p>
+                            <div class="cap-bar"><div class="cap-fill" data-width="86"></div></div>
+                        </div>
+                        <div class="capability-card glass-card" data-animate="fade-up" data-delay="600">
+                            <div class="cap-number">06</div>
+                            <h3>Swarm Intelligence</h3>
+                            <p>Multi-unit coordination for complex tasks through distributed computing and shared learning networks.</p>
+                            <div class="cap-bar"><div class="cap-fill" data-width="93"></div></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Specifications Section -->
+            <section id="specs" class="content-section">
+                <div class="section-container">
+                    <div class="section-header" data-animate="fade-up">
+                        <span class="section-tag">Specifications</span>
+                        <h2 class="section-title">Technical <span class="gradient-text">Overview</span></h2>
+                    </div>
+                    <div class="specs-grid">
+                        <div class="spec-group" data-animate="fade-up" data-delay="100">
+                            <h3 class="spec-group-title">Physical</h3>
+                            <div class="spec-row">
+                                <span class="spec-label">Height</span>
+                                <span class="spec-value">178 cm</span>
+                            </div>
+                            <div class="spec-row">
+                                <span class="spec-label">Weight</span>
+                                <span class="spec-value">73 kg</span>
+                            </div>
+                            <div class="spec-row">
+                                <span class="spec-label">Degrees of Freedom</span>
+                                <span class="spec-value">47 DOF</span>
+                            </div>
+                            <div class="spec-row">
+                                <span class="spec-label">Max Speed</span>
+                                <span class="spec-value">8.2 km/h</span>
+                            </div>
+                        </div>
+                        <div class="spec-group" data-animate="fade-up" data-delay="200">
+                            <h3 class="spec-group-title">Compute</h3>
+                            <div class="spec-row">
+                                <span class="spec-label">Neural Engine</span>
+                                <span class="spec-value">NEXUS-X1</span>
+                            </div>
+                            <div class="spec-row">
+                                <span class="spec-label">Processing Power</span>
+                                <span class="spec-value">50 TOPS</span>
+                            </div>
+                            <div class="spec-row">
+                                <span class="spec-label">Memory</span>
+                                <span class="spec-value">256 GB HBM3</span>
+                            </div>
+                            <div class="spec-row">
+                                <span class="spec-label">Battery Life</span>
+                                <span class="spec-value">18 hours</span>
+                            </div>
+                        </div>
+                        <div class="spec-group" data-animate="fade-up" data-delay="300">
+                            <h3 class="spec-group-title">Sensors</h3>
+                            <div class="spec-row">
+                                <span class="spec-label">Vision</span>
+                                <span class="spec-value">8K Stereo</span>
+                            </div>
+                            <div class="spec-row">
+                                <span class="spec-label">LiDAR Range</span>
+                                <span class="spec-value">100m</span>
+                            </div>
+                            <div class="spec-row">
+                                <span class="spec-label">Touch Sensors</span>
+                                <span class="spec-value">10,000+</span>
+                            </div>
+                            <div class="spec-row">
+                                <span class="spec-label">Microphones</span>
+                                <span class="spec-value">16-array</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Contact / CTA Section -->
+            <section id="contact" class="content-section">
+                <div class="section-container">
+                    <div class="contact-content" data-animate="fade-up">
+                        <span class="section-tag">Join The Revolution</span>
+                        <h2 class="section-title">Ready to Meet <span class="gradient-text">NEXUS?</span></h2>
+                        <p class="section-desc">Be among the first to experience the future of AI robotics. Join our early access program and help shape the next generation of intelligent machines.</p>
+                        <form class="contact-form" id="contactForm">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <input type="text" id="nameInput" placeholder="Your Name" class="form-input" required>
+                                    <div class="input-glow"></div>
+                                </div>
+                                <div class="form-group">
+                                    <input type="email" id="emailInput" placeholder="Your Email" class="form-input" required>
+                                    <div class="input-glow"></div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <select id="interestSelect" class="form-input form-select" required>
+                                    <option value="" disabled selected>Area of Interest</option>
+                                    <option value="research">Research & Development</option>
+                                    <option value="enterprise">Enterprise Solutions</option>
+                                    <option value="healthcare">Healthcare Applications</option>
+                                    <option value="education">Education & Training</option>
+                                </select>
+                                <div class="input-glow"></div>
+                            </div>
+                            <button type="submit" class="btn-primary btn-full" id="submitBtn">
+                                <span>Request Early Access</span>
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M5 12h14M12 5l7 7-7 7"/>
+                                </svg>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Footer -->
+            <footer class="site-footer">
+                <div class="footer-container">
+                    <div class="footer-top">
+                        <div class="footer-brand">
+                            <div class="nav-logo">
+                                <div class="logo-icon">
+                                    <svg viewBox="0 0 40 40" fill="none">
+                                        <circle cx="20" cy="20" r="18" stroke="url(#logoGrad3)" stroke-width="2"/>
+                                        <circle cx="20" cy="20" r="6" fill="url(#logoGrad3)"/>
+                                        <defs><linearGradient id="logoGrad3" x1="0" y1="0" x2="40" y2="40"><stop offset="0%" stop-color="#00d4ff"/><stop offset="100%" stop-color="#7b2ff7"/></linearGradient></defs>
+                                    </svg>
+                                </div>
+                                <span class="logo-text">NEXUS<span class="logo-accent">.AI</span></span>
+                            </div>
+                            <p class="footer-tagline">Pioneering the future of intelligent robotics.</p>
+                        </div>
+                        <div class="footer-links-grid">
+                            <div class="footer-col">
+                                <h4>Product</h4>
+                                <a href="#hero">Awakening</a>
+                                <a href="#about">About</a>
+                                <a href="#capabilities">Capabilities</a>
+                            </div>
+                            <div class="footer-col">
+                                <h4>Resources</h4>
+                                <a href="#specs">Specifications</a>
+                                <a href="#contact">Contact</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="footer-bottom">
+                        <p>&copy; 2026 NEXUS AI. All rights reserved.</p>
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
